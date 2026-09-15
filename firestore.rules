@@ -1,0 +1,41 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Farmer profiles collection: Allow read and write for farmers & APMC staff
+    match /farmer_profiles/{farmerId} {
+      allow read, write: if true;
+    }
+
+    // Bookings collection: Allow read and write for real-time queue, tokens, weighing and payment sync
+    match /bookings/{bookingId} {
+      allow read, write: if true;
+    }
+
+    // Helpdesk / Farmer queries
+    match /queries/{queryId} {
+      allow read, write: if true;
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read, write: if true;
+    }
+
+    // System connection check
+    match /system/{docId} {
+      allow read, write: if true;
+    }
+
+    // Catch-all
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
+

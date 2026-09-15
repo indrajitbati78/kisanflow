@@ -1,0 +1,8 @@
+{
+  "name": "KisanFlow",
+  "description": "Smart Agricultural Procurement System – digital booking, queue tracking, verification, and payment monitoring for farmers and procurement centres.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

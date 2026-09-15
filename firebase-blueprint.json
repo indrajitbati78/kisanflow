@@ -1,0 +1,73 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Authenticated user accounts in KisanFlow",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["farmer", "operator", "admin"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "FarmerProfile": {
+      "title": "FarmerProfile",
+      "description": "Farmer APMC registration and 7/12 land quota record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "uid": { "type": "string" },
+        "fullName": { "type": "string" },
+        "mobileNumber": { "type": "string" },
+        "email": { "type": "string" },
+        "district": { "type": "string" },
+        "taluka": { "type": "string" },
+        "village": { "type": "string" },
+        "landAreaAcres": { "type": "number" },
+        "aadhaarNumber": { "type": "string" },
+        "kccNumber": { "type": "string" },
+        "bankName": { "type": "string" },
+        "bankAccountEnding": { "type": "string" },
+        "ifscCode": { "type": "string" },
+        "registeredDate": { "type": "string" }
+      },
+      "required": ["id", "fullName", "mobileNumber", "district", "village", "landAreaAcres"]
+    },
+    "TokenBooking": {
+      "title": "TokenBooking",
+      "description": "Procurement slot booking and weighbridge token",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "tokenNumber": { "type": "string" },
+        "farmerId": { "type": "string" },
+        "farmerName": { "type": "string" },
+        "cropName": { "type": "string" },
+        "quantityQuintals": { "type": "number" },
+        "centreId": { "type": "string" },
+        "slotTime": { "type": "string" },
+        "bookingDate": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "tokenNumber", "farmerId", "centreId", "quantityQuintals", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents"
+    },
+    "/farmer_profiles/{farmerId}": {
+      "schema": "FarmerProfile",
+      "description": "Farmer APMC and 7/12 land registry records"
+    },
+    "/bookings/{bookingId}": {
+      "schema": "TokenBooking",
+      "description": "Token bookings and weighbridge queue entries"
+    }
+  }
+}
